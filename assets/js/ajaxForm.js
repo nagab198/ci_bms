@@ -1,7 +1,10 @@
 var base_url = $("#base_url").val();
-
+var categoryTable;
 $(document).ready(function () {
-	$('#category_table').DataTable();
+	categoryTable = $("#category_table").DataTable({
+		'ajax': base_url + 'category/fetchCategoryForDataTable',
+		'order': []
+	});
 	$('#business_table').DataTable();
 	$('#sub_category_table').DataTable();
 	$('#product_table').DataTable();
@@ -68,6 +71,17 @@ $(document).ready(function () {
 
 	}
 
+	const queryString = window.location.search;
+
+	const urlParams = new URLSearchParams(queryString);
+
+	const page_type = urlParams.get('cid')
+	if (page_type) {
+		fetchCategoryById(page_type);
+	} else {
+		console.log(page_type + ' page_type not found');
+	}
+
 	$('#category').on('click', function (e) {
 		let formId = $(this).attr('id');
 		submitForm(formId);
@@ -86,6 +100,60 @@ $(document).ready(function () {
 	});
 
 });
+
+function removeCategory(id = null) {
+	if (id) {
+		$("#removeCategoryBtn").unbind('click').bind('click', function () {
+			$.ajax({
+				url: base_url + 'category/remove/' + id,
+				type: 'delete',
+				dataType: 'json',
+				success: function (response) {
+					if (response.success === true) {
+						console.log(response.messages);
+						$(".response_msg").html('<div class="alert alert-warning alert-dismissible" role="alert">' +
+							'<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+							response.messages +
+							'</div>');
+
+						categoryTable.ajax.reload(null, false);
+						$("#deleteCategoryModal").modal('hide');
+					} else {
+						$(".response_msg").html('<div class="alert alert-warning alert-dismissible" role="alert">' +
+							'<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+							response.messages +
+							'</div>');
+					}
+				} // /response
+			}); // /ajax
+		}); // /remove teacher button clicked of the modal button
+	} // /if
+}
+
+
+function editCategory(id) {
+	window.location.href = base_url + 'admin/create_category?cid=' + id;
+
+}
+
+function fetchCategoryById(id) {
+
+	$.ajax({
+		url: base_url + 'category/fetchCategoryById/' + id,
+		type: 'get',
+		dataType: 'json',
+		success: function (response) {
+			if (response) {
+				console.log(response);
+				$('.form-name').html('Edit');
+				$("#name").val(response.name);
+				$("#meta_name").val(response.meta_name);
+				$("#meta_desc").val(response.meta_desc);
+				$("#meta_keyword").val(response.meta_keyword);
+			}
+		}
+	});
+}
 
 function clearForm() {
 	$('input[type="text"]').val('');

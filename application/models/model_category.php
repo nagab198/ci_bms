@@ -44,8 +44,9 @@ class model_category extends CI_Model
 		if ($id) {
 			$query = $this->db->get_where('category', array('id' => $id));
 			return $query->row_array();
+		} else {
+			return null;
 		}
-		return null;
 	}
 
 	public function fetchCategory($status = null)
@@ -108,13 +109,13 @@ class model_category extends CI_Model
 	* removes teacher information
 	*------------------------------------
 	*/
-	public function remove($teacherId = null)
+	public function remove($id = null)
 	{
-		if ($teacherId) {
-			$this->db->where('teacher_id', $teacherId);
-			$result = $this->db->delete('teacher');
-			return ($result === true ? true : false);
-		} // /if
+		if ($id) {
+			$this->db->where('id', $id);
+			$result = $this->db->delete('category');
+			return $result === true;
+		}
 	}
 
 	/*

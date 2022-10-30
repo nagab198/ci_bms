@@ -16,6 +16,7 @@ class Category extends CI_Controller
 		$this->load->model('model_category');
 
 	}
+
 	/*
 *------------------------------------
 * inserts the category information
@@ -92,78 +93,57 @@ class Category extends CI_Controller
 		}
 	}
 
-	public function create_record()
+	public function fetchCategoryForDataTable()
 	{
-		if ($file != null && $file['photo']['tmp_name']) {
-			$rand_name = rand(1000, 100000);
-			$file = $rand_name . "-" . $_FILES['photo']['name'];
-			$file_loc = $_FILES['photo']['tmp_name'];
-			$file_size = $_FILES['photo']['size'];
-			$file_type = $_FILES['photo']['type'];
-			$folder = "upload/";
-			move_uploaded_file($file_loc, $folder . $file);
-		} else {
-			$file = $data['path'];
+		$data = $this->model_category->fetchCategory(1);
+		$result = array('data' => array());
+		foreach ($data as $key => $value) {
+			$edit_button = '<a type="button" data-toggle="modal" data-target="#updateCategoryModal" onclick="editCategory(' . $value['id'] . ')"> <i class="glyphicon glyphicon-edit"></i> Edit</a>';
+			$delete_button = '<a type="button" data-toggle="modal" data-target="#deleteCategoryModal" onclick="removeCategory(' . $value['id'] . ')"> <i class="glyphicon glyphicon-trash"></i> Delete</a>';
+			$result['data'][$key] = array(
+				$key + 1,
+				$value['name'],
+				$value['meta_name'],
+				$value['meta_desc'],
+				$value['meta_keyword'],
+				$edit_button,
+				$delete_button
+			);
 		}
-		if (empty($data["meta_name"])) {
-			$error_array['meta_name_err'] = "Please Enter meta name";
-		} else {
-			$meta_name = validation_check($data["meta_name"]);
-		}
-		if (empty($data["meta_desc"])) {
-			$error_array['meta_desc_err'] = "Please Enter meta description";
-		} else {
-			$meta_desc = validation_check($data["meta_desc"]);
-		}
-		if (empty($data["meta_keyword"])) {
-			$error_array['meta_keyword_err'] = "Please Enter meta keyword";
-		} else {
-			$meta_keyword = validation_check($data["meta_keyword"]);
-		}
-		if (empty($data["name"])) {
-			if ($data['form_type'] == 'product') {
-				$error_array['name_err'] = "Please Enter product name";
-			} else if ($data['form_type'] == 'business') {
-				$error_array['name_err'] = "Please Enter business name";
-			} else {
-				$error_array['name_err'] = "Please Enter name";
-			}
+		echo json_encode($result);
+	}
 
-		} else {
-			$name = validation_check($data["name"]);
-		}
-		if ($data['form_type'] == 'sub_category' || $data['form_type'] == 'product' || $data['form_type'] == 'business') {
-			if (empty($data["category_id"])) {
-				$error_array['category_id_err'] = "Please Select category";
-			} else {
-				$category_id = validation_check($data["category_id"]);
+	public function fetchCategoryById($category_id)
+	{
+		$data = $this->model_category->fetchCategoryById($category_id);
+		$category = (object)array(
+			'name' => $data['name'],
+			'meta_desc' => $data['meta_desc'],
+			'meta_name' => $data['meta_name'],
+			'meta_keyword' => $data['meta_keyword'],
+		);
+		echo json_encode($category);
+	}
 
+	public function remove($category_id = null)
+	{
+		$validator = array('success' => false, 'messages' => array());
+
+		if ($category_id) {
+			$remove = $this->model_category->remove($category_id);
+			if ($remove) {
+				$validator['success'] = true;
+				$validator['messages'] = "Successfully Removed";
+			} else {
+				$validator['success'] = false;
+				$validator['messages'] = "Error while removing the information";
 			}
+		} else {
+			$validator['success'] = false;
+			$validator['messages'] = "Error Category id is invalid or missing";
 		}
-		if ($data['form_type'] == 'product' || $data['form_type'] == 'business') {
-			if (empty($data["sub_category_id"])) {
-				$error_array['sub_category_id_err'] = "Please Select sub category";
-			} else {
-				$sub_category_id = validation_check($data["sub_category_id"]);
-			}
-			if (empty($data["desc"])) {
-				$error_array['desc_err'] = "Please Enter description";
-			} else {
-				$desc = validation_check($data["desc"]);
-			}
-		}
-		if ($data['form_type'] == 'business') {
-			if (empty($data["address"])) {
-				$error_array['address_err'] = "Please Enter address";
-			} else {
-				$meta_name = validation_check($data["address"]);
-			}
-			if (empty($data["phone_number"])) {
-				$error_array['phone_number_err'] = "Please Enter phone number ";
-			} else {
-				$meta_name = validation_check($data["phone_number"]);
-			}
-		}
+
+		echo json_encode($validator);
 	}
 
 }

@@ -72,9 +72,8 @@ class Admin extends CI_Controller
 
 	public function get_category()
 	{
-		$data['category'] = $this->model_category->fetchCategory(1);
 		$this->load->view('templates/header');
-		$this->load->view('view_category', $data);
+		$this->load->view('view_category');
 		$this->load->view('templates/footer');
 	}
 

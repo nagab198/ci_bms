@@ -4,7 +4,7 @@
 <!--main content start-->
 <section id="main-content">
 	<section class="wrapper">
-		<h3><i class="fa fa-angle-right"></i> Add Categery</h3>
+		<h3><i class="fa fa-angle-right"></i> <span class="form-name">Add</span> Category</h3>
 		<span class="response_msg"></span>
 		<!-- BASIC FORM ELELEMNTS -->
 		<div class="row mt">

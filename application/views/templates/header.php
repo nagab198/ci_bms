@@ -21,12 +21,20 @@
 	<link href="<?php echo base_url('assets/css/style.css') ?>" rel="stylesheet">
 	<link href="<?php echo base_url('assets/css/style-responsive.css') ?>" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap.min.css" rel="stylesheet">
 	<!-- =======================================================
 	  Template Name: Dashio
 	  Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
 	  Author: TemplateMag.com
 	  License: https://templatemag.com/license/
 	======================================================= -->
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+
+
+
 </head>
 
 <body>

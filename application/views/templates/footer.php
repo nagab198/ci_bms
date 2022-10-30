@@ -22,6 +22,8 @@
 </section>
 <!-- js placed at the end of the document so the pages load faster -->
 <script src="<?php echo base_url('assets/lib/jquery/jquery.min.js') ?>"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 <script src="<?php echo base_url('assets/lib/bootstrap/js/bootstrap.min.js') ?>"></script>
 <script class="include" type="text/javascript"
 		src=" <?php echo base_url('assets/lib/jquery.dcjqaccordion.2.7.js') ?>"></script>
@@ -29,6 +31,8 @@
 <script src=" <?php echo base_url('assets/lib/jquery.nicescroll.js') ?>" type="text/javascript"></script>
 <!--common script for all pages-->
 <script src="<?php echo base_url('assets/lib/common-scripts.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/ajaxForm.js')?>"></script>
+
 <!--script for this page-->
 
 </body>

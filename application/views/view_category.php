@@ -15,29 +15,28 @@
 							<tr>
 								<th>ID</th>
 								<th>Category Name</th>
+								<th>Meta Name</th>
+								<th>Meta Description</th>
+								<th>Meta keywords</th>
 								<th class="numeric">Edit</th>
 								<th class="numeric">Delete</th>
 							</tr>
 							</thead>
 							<tbody>
-							<?php
-
-							if (mysqli_num_rows($result) > 0) {
-								while ($row = mysqli_fetch_array($result)) {
-									?>
-									<tr>
-										<td><?=$row['id']?></td>
-										<td><?=$row['name']?></td>
-										<td>Edit</td>
-										<td>Delete</td>
-									</tr>
-
-									<?php
-								}
+							<?php foreach ($category as $row) {
+								?>
+								<tr>
+									<td><?= $row['id'] ?></td>
+									<td><?= $row['name'] ?></td>
+									<td><?= $row['meta_name'] ?></td>
+									<td><?= $row['meta_desc'] ?></td>
+									<td><?= $row['meta_keyword'] ?></td>
+									<td>Edit</td>
+									<td>Delete</td>
+								</tr>
+								<?php
 							}
-
 							?>
-
 							</tbody>
 						</table>
 					</section>

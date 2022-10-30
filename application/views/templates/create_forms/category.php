@@ -86,4 +86,3 @@
 		<!-- /row -->
 	</section>
 	<!-- /wrapper -->
-	<script type="text/javascript" src="<?php echo base_url('assets/js/ajaxForm.js')?>"></script>

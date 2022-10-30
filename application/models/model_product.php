@@ -38,4 +38,11 @@ class model_product extends CI_Model
 
 	}
 
+	public function fetchProduct($status = null)
+	{
+//		$query = $this->db->query("SELECT * FROM product WHERE status = ?", array($status));
+		$query = $this->db->get_where('product', array('status' => $status));
+		return $query->result_array();
+	}
+
 }

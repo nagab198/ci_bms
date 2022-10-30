@@ -3,6 +3,8 @@ var base_url = $("#base_url").val();
 $(document).ready(function () {
 	$('#category_table').DataTable();
 	$('#business_table').DataTable();
+	$('#sub_category_table').DataTable();
+	$('#product_table').DataTable();
 	// $("#category").attr("disabled", false);
 	$("#sub_category").attr("disabled", false);
 	$("#product").attr("disabled", false);

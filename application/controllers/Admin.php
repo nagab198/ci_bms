@@ -5,6 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property $model_category
  * @property $model_sub_category
  * @property $model_business
+ * @property $model_product
  */
 class Admin extends CI_Controller
 {
@@ -17,6 +18,7 @@ class Admin extends CI_Controller
 		$this->load->model('model_category');
 		$this->load->model('model_sub_category');
 		$this->load->model('model_business');
+		$this->load->model('model_product');
 
 	}
 
@@ -72,21 +74,23 @@ class Admin extends CI_Controller
 	{
 		$data['category'] = $this->model_category->fetchCategory(1);
 		$this->load->view('templates/header');
-		$this->load->view('view_category',	 $data);
+		$this->load->view('view_category', $data);
 		$this->load->view('templates/footer');
 	}
 
 	public function get_sub_category()
 	{
+		$data['sub_category'] = $this->model_sub_category->fetchSubCategory(1);
 		$this->load->view('templates/header');
-		$this->load->view('view_sub_category');
+		$this->load->view('view_sub_category', $data);
 		$this->load->view('templates/footer');
 	}
 
 	public function get_product()
 	{
+		$data['product'] = $this->model_product->fetchProduct(1);
 		$this->load->view('templates/header');
-		$this->load->view('view_product');
+		$this->load->view('view_product', $data);
 		$this->load->view('templates/footer');
 	}
 

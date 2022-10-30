@@ -10,38 +10,39 @@
 			<div class="col-lg-12">
 				<div class="content-panel">
 					<section id="unseen">
-						<table class="table table-bordered table-striped table-condensed">
+						<table id="product_table" class="table table-bordered table-striped table-condensed">
 							<thead>
 							<tr>
-								<th>Code</th>
-								<th>Business Name</th>
-								<th class="numeric">Phone Number</th>
-								<th class="numeric">Description</th>
-								<th class="numeric">Address</th>
+								<th>ID</th>
+								<th>Category Name</th>
+								<th>Meta Name</th>
+								<th>Meta Description</th>
+								<th>Meta keywords</th>
+								<th>desc</th>
+								<th>category_id</th>
+								<th>sub category id</th>
 								<th class="numeric">Edit</th>
 								<th class="numeric">Delete</th>
 							</tr>
 							</thead>
 							<tbody>
-							<?php
+							<?php foreach ($product as $row) {
+								?>
+								<tr>
+									<td><?= $row['id'] ?></td>
+									<td><?= $row['name'] ?></td>
+									<td><?= $row['meta_name'] ?></td>
+									<td><?= $row['meta_desc'] ?></td>
+									<td><?= $row['meta_keyword'] ?></td>
+									<td><?= $row['desc'] ?></td>
+									<td><?= $row['category_id'] ?></td>
+									<td><?= $row['sub_category_id'] ?></td>
 
-							if (mysqli_num_rows($result) > 0) {
-								while ($row = mysqli_fetch_array($result)) {
-									?>
-									<tr>
-										<td><?=$row['id']?></td>
-										<td><?=$row['name']?></td>
-										<td><?=$row['phone_number']?></td>
-										<td><?=$row['desc']?></td>
-										<td><?=$row['address']?></td>
-										<td>Edit</td>
-										<td>Delete</td>
-									</tr>
-
-									<?php
-								}
+									<td>Edit</td>
+									<td>Delete</td>
+								</tr>
+								<?php
 							}
-
 							?>
 							</tbody>
 						</table>

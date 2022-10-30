@@ -11,7 +11,7 @@
 			<div class="col-lg-12">
 				<div class="form-panel">
 
-					<form class="form-horizontal style-form" method="post" id="add_business" name="add_business"
+					<form class="form-horizontal style-form" action="business/create" method="post" id="add_business" name="add_business"
 						  enctype="multipart/form-data">
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">Meta Name</label>
@@ -39,34 +39,18 @@
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">Select Category</label>
 							<div class="col-sm-10">
-								<!--<select class="form-control " name="category_id" id="category_id">
-									<?php
-/*									$sql = "SELECT * FROM `category` where `status` = 1 ";
-									$result = mysqli_query($GLOBALS['conn'], $sql);
-									if (mysqli_num_rows($result) > 0) {
-										while ($row = mysqli_fetch_array($result)) {
-											echo "<option value =" . $row['id'] . ">" . $row['name'] . "</option>";
-										}
-									}
-									*/?>
-								</select>-->
+								<select class="form-control " name="category_id" id="category_id">
+									<?php echo $category; ?>
+								</select>
 								<span class=" category-id text-danger"></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">Select Sub Categery</label>
 							<div class="col-sm-10">
-								<!--<select class="form-control " name="sub_category_id" id="sub_category_id">
-									<?php
-/*									$sql = "SELECT * FROM `sub_category` where `status` = 1 ";
-									$result = mysqli_query($GLOBALS['conn'], $sql);
-									if (mysqli_num_rows($result) > 0) {
-										while ($row = mysqli_fetch_array($result)) {
-											echo "<option value =" . $row['id'] . ">" . $row['name'] . "</option>";
-										}
-									}
-									*/?>
-								</select>-->
+								<select class="form-control " name="sub_category_id" id="sub_category_id">
+									<?php echo $sub_category; ?>
+								</select>
 								<span class="sub-category-id text-danger"></span>
 							</div>
 						</div>
@@ -110,7 +94,7 @@
 						<div class="form-group ">
 							<label class="col-sm-2 col-sm-2 control-label">Priority</label>
 							<label class="checkbox-inline">
-								<input type="checkbox" id="inlineCheckbox1" value="option1">
+								<input type="checkbox" name="priority" id="priority" value="1">
 							</label>
 						</div>
 						<div class="form-group">
@@ -132,7 +116,7 @@
 
 	</section>
 	<!-- /MAIN CONTENT -->
-<!--	<script src="js/ajaxForm.js"></script>-->
+	<script type="text/javascript" src="<?php echo base_url('assets/js/ajaxForm.js')?>"></script>
 
 	<!-- /MAIN CONTENT -->
 	<!--main content end-->

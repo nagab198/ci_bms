@@ -1,6 +1,6 @@
 <?php
 
-class model_category extends CI_Model
+class model_business extends CI_Model
 
 {
 	public function __construct()
@@ -25,12 +25,18 @@ class model_category extends CI_Model
 			'meta_name' => $this->input->post('meta_name'),
 			'meta_desc' => $this->input->post('meta_desc'),
 			'meta_keyword' => $this->input->post('meta_keyword'),
-			'home_priority' => $this->input->post('priority') ? 1 : 0,
+			'category_id' => $this->input->post('category_id'),
+			'sub_category_id' => $this->input->post('sub_category_id'),
+			'address' => $this->input->post('address'),
+			'phone_number' => $this->input->post('phone_number'),
+			'desc' => $this->input->post('desc'),
+			'priority' => $this->input->post('priority') ? 1 : 0,
 			'img_url' => $img_url,
 			'status' => 1,
 		);
 
-		return $this->db->insert('category', $insert_data);
+		$status = $this->db->insert('business', $insert_data);
+		return $status === true ? true : false;
 
 	}
 
@@ -39,20 +45,18 @@ class model_category extends CI_Model
 	* retrieves category information
 	*------------------------------------
 	*/
-	public function fetchCategoryById($id)
+	public function fetch_category_data($id = null)
 	{
 		if ($id) {
-			$query = $this->db->get_where('category', array('id' => $id));
+			$sql = "SELECT * FROM category WHERE id = ?";
+			$query = $this->db->query($sql, array($id));
 			return $query->row_array();
 		}
-		return null;
-	}
 
-	public function fetchCategory($status = null)
-	{
-//		$query = $this->db->query("SELECT * FROM category WHERE status = ?", array($status));
-		$query = $this->db->get_where('category', array('status' => $status));
-		return $query->result_array();
+		$sql = "SELECT * FROM category";
+		$query = $this->db->query($sql);
+		$result = $query->result_array();
+		return $result;
 	}
 
 	/*

@@ -11,7 +11,7 @@
 			<div class="col-lg-12">
 				<div class="form-panel">
 
-					<form class="form-horizontal style-form" method="post" id="add_category" action="register/create" name="add_category"
+					<form class="form-horizontal style-form" method="post" id="add_category" action="category/create" name="add_category"
 						  enctype="multipart/form-data">
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">Meta Name</label>
@@ -59,7 +59,7 @@
 						<div class="form-group ">
 							<label class="col-sm-2 col-sm-2 control-label">Home Page Category</label>
 							<label class="checkbox-inline">
-								<input type="checkbox" name="" id="inlineCheckbox1" value="1">
+								<input type="checkbox" name="priority" id="priority" value="1" >
 							</label>
 						</div>
 						<div class="form-group">
@@ -86,4 +86,4 @@
 		<!-- /row -->
 	</section>
 	<!-- /wrapper -->
-	<script type="text/javascript" src="<?php echo base_url('assets/js/category.js')?>"></script>
+	<script type="text/javascript" src="<?php echo base_url('assets/js/ajaxForm.js')?>"></script>

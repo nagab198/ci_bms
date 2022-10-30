@@ -1,7 +1,10 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Register extends CI_Controller
+/**
+ * @property $model_category
+ */
+class Category extends CI_Controller
 {
 	public function __construct()
 	{
@@ -12,8 +15,6 @@ class Register extends CI_Controller
 		// loading the teacher model
 		$this->load->model('model_category');
 
-		// loading the form validation library
-		$this->load->library('form_validation');
 	}
 	/*
 *------------------------------------

@@ -36,7 +36,6 @@ class model_sub_category extends CI_Model
 
 	public function fetchSubCategory($status = null)
 	{
-//		$query = $this->db->query("SELECT * FROM category WHERE status = ?", array($status));
 		$query = $this->db->get_where('sub_category', array('status' => $status));
 		return $query->result_array();
 	}

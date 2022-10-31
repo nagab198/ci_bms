@@ -55,6 +55,25 @@
 				</div>
 				<!-- /col-lg-4 -->
 			</div>
+			<div class="modal fade" tabindex="-1" role="dialog" id="deleteBusinessModal">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+										aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title">Remove Category</h4>
+						</div>
+						<div class="modal-body">
+							<div id="remove-messages"></div>
+							<p>Do you really want to remove ?</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary" id="removeBusinessBtn">Save changes</button>
+						</div>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
 
 		</section>
 		<!-- /wrapper -->

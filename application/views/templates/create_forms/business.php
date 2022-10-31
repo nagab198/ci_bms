@@ -4,7 +4,7 @@
 <!--main content start-->
 <section id="main-content">
 	<section class="wrapper">
-		<h3><i class="fa fa-angle-right"></i> Add Business</h3>
+		<h3><i class="fa fa-angle-right"></i> <span class="form-name">Add</span> Business</h3>
 		<!-- BASIC FORM ELELEMNTS -->
 		<span class="response_msg"></span>
 		<div class="row mt">
@@ -99,8 +99,11 @@
 						</div>
 						<div class="form-group">
 							<div class="col-lg-offset-2 col-lg-10">
-								<input type="hidden" name="form_type" value="business">
-								<button disabled class="btn btn-theme" id="business" type="submit" value="ADD">ADD
+								<input type="hidden" name="edit_business_id" id="edit_business_id">
+								<button  class="btn btn-theme" id="business" type="submit" value="ADD">ADD
+								</button>
+								<button class="btn btn-theme hidden" id="edit_business_btn" type="submit" value="ADD">
+									Edit
 								</button>
 								<button class="btn btn-theme04" type="button">Cancel</button>
 							</div>

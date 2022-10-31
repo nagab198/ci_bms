@@ -1,8 +1,10 @@
 const base_url = $("#base_url").val();
 var categoryTable;
 var subCategoryTable;
+var businessTable;
 
 $(document).ready(function () {
+
 	categoryTable = $("#category_table").DataTable({
 		'ajax': base_url + 'category/fetchCategoryForDataTable',
 		'order': []
@@ -11,14 +13,20 @@ $(document).ready(function () {
 		'ajax': base_url + 'sub_category/fetchSubCategoryForDataTable',
 		'order': []
 	});
+	businessTable = $("#business_table").DataTable({
+		'ajax': base_url + 'Business/fetchBusinessForDataTable',
+		'order': []
+	});
 
-	$('#business_table').DataTable();
-	$('#sub_category_table').DataTable();
-	$('#product_table').DataTable();
-	// // $("#category").attr("disabled", false);
-	// $("#sub_category").attr("disabled", false);
-	// $("#product").attr("disabled", false);
-	// $("#business").attr("disabled", false);
+	var productTable = $("#product_table").DataTable({
+		'ajax': base_url + 'Product/fetchProductForDataTable',
+		'order': []
+	});
+
+	// $("#category").attr("disabled", false);
+	$("#sub_category").attr("disabled", false);
+	$("#product").attr("disabled", false);
+	$("#business").attr("disabled", false);
 
 
 	/*remove error messages*/
@@ -44,7 +52,10 @@ $(document).ready(function () {
 				processData: false,
 				success: function (response) {
 					if (response.success === true) {
-						$('.response_msg').removeClass('text-danger').addClass('text-success').html(response.messages);
+						$('.response_msg').html('<div class="alert alert-success alert-dismissible" role="alert">' +
+							'<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+							response.messages +
+							'</div>');
 						$('.form-group').removeClass('has-error').removeClass('has-success');
 						$('.text-danger').remove();
 						redirect(formId);
@@ -78,7 +89,6 @@ $(document).ready(function () {
 
 	const queryString = window.location.search;
 	const urlParams = new URLSearchParams(queryString);
-	const cType = urlParams.get('cid');
 
 	if (urlParams.get('cid')) {
 		fetchCategoryById(urlParams.get('cid'));
@@ -86,6 +96,12 @@ $(document).ready(function () {
 
 	if (urlParams.get('scid')) {
 		fetchSubCategoryById(urlParams.get('scid'));
+	}
+	if (urlParams.get('bid')) {
+		fetchBusinessById(urlParams.get('bid'));
+	}
+	if (urlParams.get('pid')) {
+		fetchProductById(urlParams.get('pid'));
 	}
 
 
@@ -121,11 +137,11 @@ $(document).ready(function () {
 	$('#edit_product_btn').on('click', function (e) {
 		var pId = $('#edit_product_id').val();
 		submitForm('edit_product', pId);
-	})
+	});
 	$('#edit_business_btn').on('click', function (e) {
 		var bId = $('#edit_business_id').val();
 		submitForm('edit_business', bId);
-	})
+	});
 
 });
 
@@ -187,6 +203,35 @@ function removeSubCategory(id) {
 	}
 }
 
+function removeBusiness(id) {
+	if (id) {
+		$("#removeBusinessBtn").unbind('click').bind('click', function () {
+			$.ajax({
+				url: base_url + 'business/remove/' + id,
+				type: 'delete',
+				dataType: 'json',
+				success: function (response) {
+					if (response.success === true) {
+						console.log(response.messages);
+						$(".response_msg").html('<div class="alert alert-warning alert-dismissible" role="alert">' +
+							'<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+							response.messages +
+							'</div>');
+
+						businessTable.ajax.reload(null, false);
+						$("#deleteBusinessModal").modal('hide');
+					} else {
+						$(".response_msg").html('<div class="alert alert-warning alert-dismissible" role="alert">' +
+							'<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+							response.messages +
+							'</div>');
+					}
+				} // /response
+			}); // /ajax
+		}); // /remove teacher button clicked of the modal button
+	}
+}
+
 function editCategory(id) {
 	window.location.href = base_url + 'admin/create_category?cid=' + id;
 
@@ -195,6 +240,17 @@ function editCategory(id) {
 function editSubCategory(id) {
 	window.location.href = base_url + 'admin/create_sub_category?scid=' + id;
 }
+
+function editBusiness(id) {
+	window.location.href = base_url + 'admin/create_business?bid=' + id;
+}
+
+function editProduct(id) {
+	window.location.href = base_url + 'admin/create_product?pid=' + id;
+}
+
+
+//functions list for fetch recordsDisplay
 
 function fetchCategoryById(id) {
 
@@ -234,6 +290,55 @@ function fetchSubCategoryById(id) {
 				$('.form-name').html('Edit');
 				$("#name").val(response.name);
 				$("#edit_sub_category_id").val(response.sub_category_id);
+				$("#meta_name").val(response.meta_name);
+				$("#meta_desc").val(response.meta_desc);
+				$("#meta_keyword").val(response.meta_keyword);
+			}
+		}
+	});
+}
+
+
+function fetchBusinessById(bid) {
+	$.ajax({
+		url: base_url + 'Business/fetchBusinessById/' + bid,
+		type: 'get',
+		dataType: 'json',
+		success: function (response) {
+			if (response) {
+				$('#business').hide();
+				$('#edit_business_btn').removeClass('hidden');
+				$('#add_business').attr('id', 'edit_business').attr('action', 'business/update').attr('name', 'edit_business');
+				console.log(response);
+				$('.form-name').html('Edit');
+				$("#name").val(response.name);
+				$("#edit_category_id").val(response.category_id);
+				$("#meta_name").val(response.meta_name);
+				$("#meta_desc").val(response.meta_desc);
+				$("#meta_keyword").val(response.meta_keyword);
+				$("#desc").val(response.desc);
+				$('#phone_number').val(response.phone_number);
+				$('#address').val(response.address);
+				$('#edit_business_id').val(response.business_id);
+			}
+		}
+	});
+}
+
+function fetchProductById(pid) {
+	$.ajax({
+		url: base_url + 'product/fetchProductById/' + pid,
+		type: 'get',
+		dataType: 'json',
+		success: function (response) {
+			if (response) {
+				$('#product').hide();
+				$('#edit_product_btn').removeClass('hidden');
+				$('#add_product').attr('id', 'edit_product').attr('action', 'product/update').attr('name', 'edit_product');
+				console.log(response);
+				$('.form-name').html('Edit');
+				$("#name").val(response.name);
+				$("#edit_category_id").val(response.category_id);
 				$("#meta_name").val(response.meta_name);
 				$("#meta_desc").val(response.meta_desc);
 				$("#meta_keyword").val(response.meta_keyword);

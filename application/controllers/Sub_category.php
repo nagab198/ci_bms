@@ -57,13 +57,18 @@ class Sub_category extends CI_Controller
 		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
 		if ($this->form_validation->run() === true) {
-			$imgUrl = $this->uploadImage();
-			if ($this->model_sub_category->create($imgUrl)) {
-				$validator['success'] = true;
-				$validator['messages'] = "Successfully added";
-			} else {
+			$file = do_upload();
+			if (isset($file['error'])) {
 				$validator['success'] = false;
-				$validator['messages'] = "Error while inserting the information into the database";
+				$validator['messages'] = $file['error'];
+			} else {
+				if ($this->model_sub_category->create($file['file_name'])) {
+					$validator['success'] = true;
+					$validator['messages'] = "Successfully added";
+				} else {
+					$validator['success'] = false;
+					$validator['messages'] = "Error while inserting the information into the database";
+				}
 			}
 		} else {
 			$validator['success'] = false;
@@ -110,13 +115,18 @@ class Sub_category extends CI_Controller
 			$this->form_validation->set_rules($validate_data);
 			$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 			if ($this->form_validation->run() === true) {
-				$img = $this->uploadImage();
-				if ($this->model_sub_category->updateInfo($data, $img)) {
-					$validator['success'] = true;
-					$validator['messages'] = "Successfully updated sub category";
-				} else {
+				$file = do_upload();
+				if (isset($file['error'])) {
 					$validator['success'] = false;
-					$validator['messages'] = "Error while inserting the information into the database";
+					$validator['messages'] = $file['error'];
+				} else {
+					if ($this->model_sub_category->updateInfo($data, $file['file_name'])) {
+						$validator['success'] = true;
+						$validator['messages'] = "Successfully updated sub category";
+					} else {
+						$validator['success'] = false;
+						$validator['messages'] = "Error while inserting the information into the database";
+					}
 				}
 			} else {
 				$validator['success'] = false;

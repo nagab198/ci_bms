@@ -50,7 +50,7 @@
 			</div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
 
-		<div class="modal fade" tabindex="-1" role="dialog" id="updateCategoryModal">
+		<div class="modal fade" tabindex="-1" role="dialog" id="updateCategryModal">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">

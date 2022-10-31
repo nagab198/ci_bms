@@ -66,13 +66,18 @@ class Product extends CI_Controller
 		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
 		if ($this->form_validation->run() === true) {
-			$imgUrl = $this->uploadImage();
-			if ($this->model_product->create($imgUrl)) {
-				$validator['success'] = true;
-				$validator['messages'] = "Successfully added";
-			} else {
+			$file = do_upload();
+			if (isset($file['error'])) {
 				$validator['success'] = false;
-				$validator['messages'] = "Error while inserting the information into the database";
+				$validator['messages'] = $file['error'];
+			} else {
+				if ($this->model_product->create($file['file_name'])) {
+					$validator['success'] = true;
+					$validator['messages'] = "Successfully added";
+				} else {
+					$validator['success'] = false;
+					$validator['messages'] = "Error while inserting the information into the database";
+				}
 			}
 		} else {
 			$validator['success'] = false;
@@ -129,13 +134,19 @@ class Product extends CI_Controller
 			$this->form_validation->set_rules($validate_data);
 			$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 			if ($this->form_validation->run() === true) {
-				$img = $this->uploadImage();
-				if ($this->model_product->updateInfo($data, $img)) {
-					$validator['success'] = true;
-					$validator['messages'] = "Successfully updated Product information";
-				} else {
+				$file = do_upload();
+				if (isset($file['error'])) {
 					$validator['success'] = false;
-					$validator['messages'] = "Error while inserting the information into the database";
+					$validator['messages'] = $file['error'];
+				} else {
+					if ($this->model_product->updateInfo($data, $file['file_name'])) {
+						$validator['success'] = true;
+						$validator['messages'] = "Successfully updated Product information";
+					} else {
+						$validator['success'] = false;
+						$validator['messages'] = "Error while inserting the information into the database";
+					}
+
 				}
 			} else {
 				$validator['success'] = false;
@@ -210,24 +221,4 @@ class Product extends CI_Controller
 		echo json_encode($validator);
 	}
 
-	/*
-	*------------------------------------
-	* returns the uploaded image url
-	*------------------------------------
-	*/
-	public function uploadImage()
-	{
-		$type = explode('.', $_FILES['photo']['name']);
-		$type = $type[count($type) - 1];
-		$url = 'uploads/images/categories/' . uniqid(rand()) . '.' . $type;
-		if (in_array($type, array('gif', 'jpg', 'jpeg', 'png', 'JPG', 'GIF', 'JPEG', 'PNG'))) {
-			if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
-				if (move_uploaded_file($_FILES['photo']['tmp_name'], $url)) {
-					return $url;
-				} else {
-					return false;
-				}
-			}
-		}
-	}
 }

@@ -1,24 +1,22 @@
-<?php
-/*
-	*------------------------------------
-	* returns the uploaded image url
-	*------------------------------------
-	*/
-function uploadImage()
-{
-	$type = explode('.', $_FILES['photo']['name']);
-	$type = $type[count($type) - 1];
-	$url = 'uploads/images/categories/' . uniqid(rand()) . '.' . $type;
-	if (in_array($type, array('gif', 'jpg', 'jpeg', 'png', 'JPG', 'GIF', 'JPEG', 'PNG'))) {
-		if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
-			if (move_uploaded_file($_FILES['photo']['tmp_name'], $url)) {
-				return $url;
-			} else {
-				return false;
-			}
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+
+if (!function_exists('do_upload')) {
+
+	function do_upload()
+	{
+		$config['upload_path'] = 'uploads/images/categories/';
+		$config['allowed_types'] = 'gif|jpg|jpeg|png';
+		$config['max_size'] = 100;
+		$config['encrypt_name'] = true;
+		$config['remove_spaces'] = true;
+		$config['detect_mime'] = true;
+		$instance =& get_instance();
+		$instance->load->library('upload', $config);
+		if (!$instance->upload->do_upload('photo')) {
+			return array('error' => $instance->upload->display_errors());
+		} else {
+			$data = $instance->upload->data();
+			return array('file_name' => $data['file_name']);
 		}
 	}
 }
-
-
-?>

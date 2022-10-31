@@ -16,7 +16,7 @@ class model_category extends CI_Model
 	*/
 	public function create($img_url)
 	{
-		if ($img_url == '') {
+		if (!$img_url) {
 			$img_url = 'uploads/images/default/default_avatar.png';
 		}
 

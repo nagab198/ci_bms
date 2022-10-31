@@ -86,7 +86,10 @@
 						</div>
 						<div class="form-group">
 							<div class="col-lg-offset-2 col-lg-10">
-								<input type="hidden" name="form_type" value="product">
+								<input type="hidden" name="edit_product_id" id="edit_product_id">
+								<button class="btn btn-theme hidden" id="edit_product_btn" type="submit" value="ADD">
+									Edit
+								</button>
 								<button disabled class="btn btn-theme" id="product" type="submit" value="ADD" >ADD</button>
 								<button class="btn btn-theme04" type="button">Cancel</button>
 							</div>

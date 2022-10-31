@@ -6,6 +6,7 @@
 	<section id="main-content">
 		<section class="wrapper">
 			<h3><i class="fa fa-angle-right"></i> View Business</h3>
+			<span class="response_msg"></span>
 			<div class="row mt">
 				<div class="col-lg-12">
 					<div class="content-panel">

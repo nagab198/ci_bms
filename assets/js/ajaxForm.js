@@ -2,6 +2,7 @@ const base_url = $("#base_url").val();
 var categoryTable;
 var subCategoryTable;
 var businessTable;
+var productTable;
 
 $(document).ready(function () {
 
@@ -18,7 +19,7 @@ $(document).ready(function () {
 		'order': []
 	});
 
-	var productTable = $("#product_table").DataTable({
+	productTable = $("#product_table").DataTable({
 		'ajax': base_url + 'Product/fetchProductForDataTable',
 		'order': []
 	});
@@ -232,9 +233,38 @@ function removeBusiness(id) {
 	}
 }
 
+function removeProduct(id) {
+	if (id) {
+		$("#removeProductBtn").unbind('click').bind('click', function () {
+			$.ajax({
+				url: base_url + 'product/remove/' + id,
+				type: 'delete',
+				dataType: 'json',
+				success: function (response) {
+					if (response.success === true) {
+						console.log(response.messages);
+						$(".response_msg").html('<div class="alert alert-warning alert-dismissible" role="alert">' +
+							'<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+							response.messages +
+							'</div>');
+
+						productTable.ajax.reload(null, false);
+						$("#deleteProductModal").modal('hide');
+					} else {
+						$(".response_msg").html('<div class="alert alert-warning alert-dismissible" role="alert">' +
+							'<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+							response.messages +
+							'</div>');
+					}
+				} // /response
+			}); // /ajax
+		}); //
+	}
+}
+
+
 function editCategory(id) {
 	window.location.href = base_url + 'admin/create_category?cid=' + id;
-
 }
 
 function editSubCategory(id) {
@@ -298,7 +328,6 @@ function fetchSubCategoryById(id) {
 	});
 }
 
-
 function fetchBusinessById(bid) {
 	$.ajax({
 		url: base_url + 'Business/fetchBusinessById/' + bid,
@@ -337,11 +366,13 @@ function fetchProductById(pid) {
 				$('#add_product').attr('id', 'edit_product').attr('action', 'product/update').attr('name', 'edit_product');
 				console.log(response);
 				$('.form-name').html('Edit');
+				$('#edit_product_id').val(response.product_id);
 				$("#name").val(response.name);
 				$("#edit_category_id").val(response.category_id);
 				$("#meta_name").val(response.meta_name);
 				$("#meta_desc").val(response.meta_desc);
 				$("#meta_keyword").val(response.meta_keyword);
+				$('#desc').val(response.desc);
 			}
 		}
 	});
@@ -355,10 +386,10 @@ function clearForm() {
 
 function redirect(req) {
 	//for redirects form submissions
-	if (req === 'add_category' || req === 'edit_category') return window.location.href = base_url + '/admin/get_category';
-	if (req === 'add_sub_category' || req === 'edit_sub_category') return window.location.href = base_url + '/admin/get_sub_category';
-	if (req === 'add_product' || req === 'edit_product') return window.location.href = base_url + '/admin/get_product';
-	if (req === 'add_business' || req === 'edit_business') return window.location.href = base_url + '/admin/get_business';
+	if (req === 'add_category' || req === 'edit_category') return window.location.href = base_url + 'admin/get_category';
+	if (req === 'add_sub_category' || req === 'edit_sub_category') return window.location.href = base_url + 'admin/get_sub_category';
+	if (req === 'add_product' || req === 'edit_product') return window.location.href = base_url + 'admin/get_product';
+	if (req === 'add_business' || req === 'edit_business') return window.location.href = base_url + 'admin/get_business';
 
 
 }

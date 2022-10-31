@@ -4,14 +4,15 @@
 <!--main content start-->
 <section id="main-content">
 	<section class="wrapper">
-		<h3><i class="fa fa-angle-right"></i> Add Categery</h3>
+		<h3><i class="fa fa-angle-right"></i> <span class="form-name">Add</span> Category</h3>
 		<span class="response_msg"></span>
 		<!-- BASIC FORM ELELEMNTS -->
 		<div class="row mt">
 			<div class="col-lg-12">
 				<div class="form-panel">
 
-					<form class="form-horizontal style-form" method="post" id="add_category" action="register/create" name="add_category"
+					<form class="form-horizontal style-form" method="post" id="add_category" action="category/create"
+						  name="add_category"
 						  enctype="multipart/form-data">
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">Meta Name</label>
@@ -52,20 +53,23 @@
 							<label class="control-label col-md-3">Upload Image</label>
 							<div class="col-md-4">
 								<input type="file" name="photo" class="default"/>
-								<input type="hidden" name="path" value="img.png">
 								<span class=" photo text-danger"></span>
 							</div>
 						</div>
 						<div class="form-group ">
 							<label class="col-sm-2 col-sm-2 control-label">Home Page Category</label>
 							<label class="checkbox-inline">
-								<input type="checkbox" name="" id="inlineCheckbox1" value="1">
+								<input type="checkbox" name="priority" id="priority" value="1">
+								<span class=" priority text-danger"></span>
 							</label>
 						</div>
 						<div class="form-group">
 							<div class="col-lg-offset-2 col-lg-10">
-								<input type="hidden" name="form_type" value="category">
-								<button  class="btn btn-theme" id="category" type="submit" value="ADD" >ADD</button>
+								<input type="hidden" name="edit_category_id" id="edit_category_id">
+								<button class="btn btn-theme" id="category" type="submit" value="ADD">ADD</button>
+								<button class="btn btn-theme hidden" id="edit_category_btn" type="submit" value="ADD">
+									Edit
+								</button>
 								<button class="btn btn-theme04" type="button">Cancel</button>
 							</div>
 						</div>
@@ -86,4 +90,3 @@
 		<!-- /row -->
 	</section>
 	<!-- /wrapper -->
-	<script type="text/javascript" src="<?php echo base_url('assets/js/category.js')?>"></script>

@@ -1,6 +1,6 @@
 <?php
 
-class model_category extends CI_Model
+class model_product extends CI_Model
 
 {
 	public function __construct()
@@ -16,7 +16,7 @@ class model_category extends CI_Model
 	*/
 	public function create($img_url)
 	{
-		if (!$img_url) {
+		if ($img_url == '') {
 			$img_url = 'uploads/images/default/default_avatar.png';
 		}
 
@@ -25,37 +25,34 @@ class model_category extends CI_Model
 			'meta_name' => $this->input->post('meta_name'),
 			'meta_desc' => $this->input->post('meta_desc'),
 			'meta_keyword' => $this->input->post('meta_keyword'),
+			'category_id' => $this->input->post('category_id'),
+			'sub_category_id' => $this->input->post('sub_category_id'),
+			'desc' => $this->input->post('desc'),
+			'status' => 1,
 			'home_priority' => $this->input->post('priority') ? 1 : 0,
 			'img_url' => $img_url,
-			'status' => 1,
 		);
 
-		return $this->db->insert('category', $insert_data);
+		$status = $this->db->insert('product', $insert_data);
+		return $status === true ? true : false;
 
 	}
 
-	/*
-	*------------------------------------
-	* retrieves category information
-	*------------------------------------
-	*/
-	public function fetchCategoryById($id)
+	public function fetchProduct($status = null)
+	{
+		$query = $this->db->get_where('product', array('status' => $status));
+		return $query->result_array();
+	}
+
+	public function fetchProductById($id)
 	{
 		if ($id) {
-			$query = $this->db->get_where('category', array('id' => $id));
+			$query = $this->db->get_where('product', array('id' => $id));
 			return $query->row_array();
 		} else {
 			return null;
 		}
 	}
-
-	public function fetchCategory($status = null)
-	{
-//		$query = $this->db->query("SELECT * FROM category WHERE status = ?", array($status));
-		$query = $this->db->get_where('category', array('status' => $status));
-		return $query->result_array();
-	}
-
 
 	public function updateInfo($data, $img)
 	{
@@ -66,60 +63,28 @@ class model_category extends CI_Model
 				'meta_name' => $this->input->post('meta_name') ? $this->input->post('meta_name') : $data['meta_name'],
 				'meta_desc' => $this->input->post('meta_desc') ? $this->input->post('meta_desc') : $data['meta_desc'],
 				'meta_keyword' => $this->input->post('meta_keyword') ? $this->input->post('meta_keyword') : $data['meta_keyword'],
+				'category_id' => $this->input->post('category_id') ? $this->input->post('category_id') : $data['category_id'],
+				'sub_category_id' => $this->input->post('sub_category_id') ? $this->input->post('sub_category_id') : $data['sub_category_id'],
+				'desc' => $this->input->post('desc') ? $this->input->post('desc') : $data['desc'],
 				'home_priority' => $this->input->post('priority') ? $this->input->post('priority') : $data['home_priority'],
 				'img_url' => $img ? $img : $data['img_url'],
 			);
 
 			$this->db->where('id', $id);
-			$query = $this->db->update('category', $update_data);
+			$query = $this->db->update('product', $update_data);
 			return ($query === true ? true : false);
 		} else {
 			return false;
 		}
 	}
 
-	/*
-	*------------------------------------
-	* updates teacher information
-	*------------------------------------
-	*/
-	public function updatePhoto($teacherId = null, $imageUrl = null)
-	{
-		if ($teacherId && $imageUrl) {
-			$update_data = array(
-				'image' => $imageUrl
-			);
-
-			$this->db->where('teacher_id', $teacherId);
-			$query = $this->db->update('teacher', $update_data);
-
-			return ($query === true ? true : false);
-		}
-	}
-
-	/*
-	*------------------------------------
-	* removes teacher information
-	*------------------------------------
-	*/
 	public function remove($id = null)
 	{
 		if ($id) {
 			$this->db->where('id', $id);
-			$result = $this->db->delete('category');
+			$result = $this->db->delete('product');
 			return $result === true;
 		}
 	}
 
-	/*
-	*------------------------------------
-	* count total teacher information
-	*------------------------------------
-	*/
-	public function countTotalTeacher()
-	{
-		$sql = "SELECT * FROM teacher";
-		$query = $this->db->query($sql);
-		return $query->num_rows();
-	}
 }

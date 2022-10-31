@@ -4,14 +4,14 @@
 <!--main content start-->
 <section id="main-content">
 	<section class="wrapper">
-		<h3><i class="fa fa-angle-right"></i> Add Business</h3>
+		<h3><i class="fa fa-angle-right"></i> <span class="form-name">Add</span> Business</h3>
 		<!-- BASIC FORM ELELEMNTS -->
 		<span class="response_msg"></span>
 		<div class="row mt">
 			<div class="col-lg-12">
 				<div class="form-panel">
 
-					<form class="form-horizontal style-form" method="post" id="add_business" name="add_business"
+					<form class="form-horizontal style-form" action="business/create" method="post" id="add_business" name="add_business"
 						  enctype="multipart/form-data">
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">Meta Name</label>
@@ -39,34 +39,18 @@
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">Select Category</label>
 							<div class="col-sm-10">
-								<!--<select class="form-control " name="category_id" id="category_id">
-									<?php
-/*									$sql = "SELECT * FROM `category` where `status` = 1 ";
-									$result = mysqli_query($GLOBALS['conn'], $sql);
-									if (mysqli_num_rows($result) > 0) {
-										while ($row = mysqli_fetch_array($result)) {
-											echo "<option value =" . $row['id'] . ">" . $row['name'] . "</option>";
-										}
-									}
-									*/?>
-								</select>-->
+								<select class="form-control " name="category_id" id="category_id">
+									<?php echo $category; ?>
+								</select>
 								<span class=" category-id text-danger"></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">Select Sub Categery</label>
 							<div class="col-sm-10">
-								<!--<select class="form-control " name="sub_category_id" id="sub_category_id">
-									<?php
-/*									$sql = "SELECT * FROM `sub_category` where `status` = 1 ";
-									$result = mysqli_query($GLOBALS['conn'], $sql);
-									if (mysqli_num_rows($result) > 0) {
-										while ($row = mysqli_fetch_array($result)) {
-											echo "<option value =" . $row['id'] . ">" . $row['name'] . "</option>";
-										}
-									}
-									*/?>
-								</select>-->
+								<select class="form-control " name="sub_category_id" id="sub_category_id">
+									<?php echo $sub_category; ?>
+								</select>
 								<span class="sub-category-id text-danger"></span>
 							</div>
 						</div>
@@ -110,13 +94,16 @@
 						<div class="form-group ">
 							<label class="col-sm-2 col-sm-2 control-label">Priority</label>
 							<label class="checkbox-inline">
-								<input type="checkbox" id="inlineCheckbox1" value="option1">
+								<input type="checkbox" name="priority" id="priority" value="1">
 							</label>
 						</div>
 						<div class="form-group">
 							<div class="col-lg-offset-2 col-lg-10">
-								<input type="hidden" name="form_type" value="business">
-								<button disabled class="btn btn-theme" id="business" type="submit" value="ADD">ADD
+								<input type="hidden" name="edit_business_id" id="edit_business_id">
+								<button  class="btn btn-theme" id="business" type="submit" value="ADD">ADD
+								</button>
+								<button class="btn btn-theme hidden" id="edit_business_btn" type="submit" value="ADD">
+									Edit
 								</button>
 								<button class="btn btn-theme04" type="button">Cancel</button>
 							</div>
@@ -132,7 +119,6 @@
 
 	</section>
 	<!-- /MAIN CONTENT -->
-<!--	<script src="js/ajaxForm.js"></script>-->
 
 	<!-- /MAIN CONTENT -->
 	<!--main content end-->

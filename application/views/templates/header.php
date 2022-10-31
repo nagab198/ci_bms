@@ -10,8 +10,8 @@
 	<title>Dashio - Bootstrap Admin Template</title>
 
 	<!-- Favicons -->
-	<link href="img/favicon.png" rel="icon">
-	<link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+	<!--	<link href="img/favicon.png" rel="icon">-->
+	<!--	<link href="img/apple-touch-icon.png" rel="apple-touch-icon">-->
 
 	<!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="<?php echo base_url('assets/lib/bootstrap/css/bootstrap.min.css') ?>">
@@ -21,6 +21,8 @@
 	<link href="<?php echo base_url('assets/css/style.css') ?>" rel="stylesheet">
 	<link href="<?php echo base_url('assets/css/style-responsive.css') ?>" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<!--	<link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap.min.css" rel="stylesheet">-->
+	<link href="<?php echo base_url('assets/lib/advanced-datatable/css/DT_bootstrap.css') ?>" rel="stylesheet">
 	<!-- =======================================================
 	  Template Name: Dashio
 	  Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
@@ -41,14 +43,14 @@
 			<div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
 		</div>
 		<!--logo start-->
-		<a href="index.php" class="logo"><b>DASH<span>IO</span></b></a>
+		<a href="<?php echo base_url() ?>" class="logo"><b>DASH<span>IO</span></b></a>
 		<!--logo end-->
 		<div class="nav notify-row" id="top_menu">
 			<!--  notification start -->
 			<ul class="nav top-menu">
 				<!-- settings start -->
 				<li class="dropdown">
-					<a data-toggle="dropdown" class="dropdown-toggle" href="index.php">
+					<a data-toggle="dropdown" class="dropdown-toggle" href="<?php echo base_url() ?>">
 						<i class="fa fa-tasks"></i>
 						<span class="badge bg-theme">4</span>
 					</a>
@@ -58,7 +60,7 @@
 							<p class="green">You have 4 pending tasks</p>
 						</li>
 						<li>
-							<a href="index.php">
+							<a href="<?php echo base_url() ?>">
 								<div class="task-info">
 									<div class="desc">Dashio Admin Panel</div>
 									<div class="percent">40%</div>
@@ -72,7 +74,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="index.php">
+							<a href="<?php echo base_url() ?>">
 								<div class="task-info">
 									<div class="desc">Database Update</div>
 									<div class="percent">60%</div>
@@ -86,7 +88,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="index.php">
+							<a href="<?php echo base_url() ?>">
 								<div class="task-info">
 									<div class="desc">Product Development</div>
 									<div class="percent">80%</div>
@@ -100,7 +102,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="index.php">
+							<a href="<?php echo base_url() ?>">
 								<div class="task-info">
 									<div class="desc">Payments Sent</div>
 									<div class="percent">70%</div>
@@ -121,7 +123,7 @@
 				<!-- settings end -->
 				<!-- inbox dropdown start-->
 				<li id="header_inbox_bar" class="dropdown">
-					<a data-toggle="dropdown" class="dropdown-toggle" href="index.php">
+					<a data-toggle="dropdown" class="dropdown-toggle" href="<?php echo base_url() ?>">
 						<i class="fa fa-envelope-o"></i>
 						<span class="badge bg-theme">5</span>
 					</a>
@@ -131,7 +133,7 @@
 							<p class="green">You have 5 new messages</p>
 						</li>
 						<li>
-							<a href="index.php">
+							<a href="<?php echo base_url() ?>">
 								<span class="photo"><img alt="avatar"
 														 src="<?php echo base_url('assets/img/ui-zac.jpg') ?>"></span>
 								<span class="subject">
@@ -144,8 +146,8 @@
 							</a>
 						</li>
 						<li>
-							<a href="index.php">
-								<span class="photo"><img alt="avatar" src="img/ui-divya.jpg"></span>
+							<a href="<?php echo base_url() ?>">
+								<span class="photo"><img alt="avatar" src="<?php echo base_url('assets/img/ui-divya.jpg') ?>"></span>
 								<span class="subject">
                   <span class="from">Divya Manian</span>
                   <span class="time">40 mins.</span>
@@ -156,8 +158,8 @@
 							</a>
 						</li>
 						<li>
-							<a href="index.php">
-								<span class="photo"><img alt="avatar" src="img/ui-danro.jpg"></span>
+							<a href="<?php echo base_url() ?>">
+								<span class="photo"><img alt="avatar" src="<?php echo base_url('assets/img/ui-danro.jpg') ?>"></span>
 								<span class="subject">
                   <span class="from">Dan Rogers</span>
                   <span class="time">2 hrs.</span>
@@ -168,8 +170,8 @@
 							</a>
 						</li>
 						<li>
-							<a href="index.php">
-								<span class="photo"><img alt="avatar" src="img/ui-sherman.jpg"></span>
+							<a href="<?php echo base_url() ?>">
+								<span class="photo"><img alt="avatar" src="<?php echo base_url('assets/img/ui-sherman.jpg') ?>"></span>
 								<span class="subject">
                   <span class="from">Dj Sherman</span>
                   <span class="time">4 hrs.</span>
@@ -180,14 +182,14 @@
 							</a>
 						</li>
 						<li>
-							<a href="index.php">See all messages</a>
+							<a href="<?php echo base_url() ?>">See all messages</a>
 						</li>
 					</ul>
 				</li>
 				<!-- inbox dropdown end -->
 				<!-- notification dropdown start-->
 				<li id="header_notification_bar" class="dropdown">
-					<a data-toggle="dropdown" class="dropdown-toggle" href="index.php">
+					<a data-toggle="dropdown" class="dropdown-toggle" href="<?php echo base_url() ?>">
 						<i class="fa fa-bell-o"></i>
 						<span class="badge bg-warning">7</span>
 					</a>
@@ -197,35 +199,35 @@
 							<p class="yellow">You have 7 new notifications</p>
 						</li>
 						<li>
-							<a href="index.php">
+							<a href="<?php echo base_url() ?>">
 								<span class="label label-danger"><i class="fa fa-bolt"></i></span>
 								Server Overloaded.
 								<span class="small italic">4 mins.</span>
 							</a>
 						</li>
 						<li>
-							<a href="index.php">
+							<a href="<?php echo base_url() ?>">
 								<span class="label label-warning"><i class="fa fa-bell"></i></span>
 								Memory #2 Not Responding.
 								<span class="small italic">30 mins.</span>
 							</a>
 						</li>
 						<li>
-							<a href="index.php">
+							<a href="<?php echo base_url() ?>">
 								<span class="label label-danger"><i class="fa fa-bolt"></i></span>
 								Disk Space Reached 85%.
 								<span class="small italic">2 hrs.</span>
 							</a>
 						</li>
 						<li>
-							<a href="index.php">
+							<a href="<?php echo base_url() ?>">
 								<span class="label label-success"><i class="fa fa-plus"></i></span>
 								New User Registered.
 								<span class="small italic">3 hrs.</span>
 							</a>
 						</li>
 						<li>
-							<a href="index.php">See all notifications</a>
+							<a href="<?php echo base_url() ?>">See all notifications</a>
 						</li>
 					</ul>
 				</li>
@@ -235,7 +237,7 @@
 		</div>
 		<div class="top-menu">
 			<ul class="nav pull-right top-menu">
-				<li><a class="logout" href="login.html">Logout</a></li>
+				<li><a class="logout" href="<?php echo base_url('user/logout') ?>">Logout</a></li>
 			</ul>
 		</div>
 	</header>
@@ -253,7 +255,7 @@
 				</p>
 				<h5 class="centered">Sam Soffes</h5>
 				<li class="mt">
-					<a href="index.php">
+					<a href="<?php echo base_url() ?>">
 						<i class="fa fa-dashboard"></i>
 						<span>Dashboard</span>
 					</a>
@@ -303,7 +305,7 @@
 					</ul>
 				</li>
 				<li class="sub-menu">
-					<a href="user.php">
+					<a href="<?php echo base_url('/admin/get_user')?>">
 						<i class="fa fa-group"></i>
 						<span>Users</span>
 					</a>

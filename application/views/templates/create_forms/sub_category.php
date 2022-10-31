@@ -4,14 +4,15 @@
 <!--main content start-->
 <section id="main-content">
 	<section class="wrapper">
-		<h3><i class="fa fa-angle-right"></i> Add Sub Categery</h3>
+		<h3><i class="fa fa-angle-right"></i> <span class="form-name">Add</span> Sub Category</h3>
 		<span class="response_msg"></span>
 		<!-- BASIC FORM ELELEMNTS -->
 		<div class="row mt">
 			<div class="col-lg-12">
 				<div class="form-panel">
 
-					<form class="form-horizontal style-form" method="post" id="add_sub_category" name="add_sub_category"
+					<form class="form-horizontal style-form" action="sub_category/create" method="post"
+						  id="add_sub_category" name="add_sub_category"
 						  enctype="multipart/form-data">
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">Meta Name</label>
@@ -40,15 +41,7 @@
 							<label class="col-sm-2 col-sm-2 control-label">Select Categery</label>
 							<div class="col-sm-10">
 								<select class="form-control " name="category_id" id="category_id">
-									<?php
-									$sql = "SELECT * FROM `category` where `status` = 1 ";
-									$result = mysqli_query($GLOBALS['conn'], $sql);
-									if (mysqli_num_rows($result) > 0) {
-										while ($row = mysqli_fetch_array($result)) {
-											echo "<option value =" . $row['id'] . ">" . $row['name'] . "</option>";
-										}
-									}
-									?>
+									<?php echo $category; ?>
 								</select>
 								<span class=" category-id-err text-danger"></span>
 							</div>
@@ -65,18 +58,17 @@
 							<label class="control-label col-md-3">Upload Image</label>
 							<div class="col-md-4">
 								<input type="file" name="photo" class="default"/>
-								<input type="hidden" name="path" value="img.png">
 								<span class=" photo text-danger"></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-lg-offset-2 col-lg-10">
-								<input type="hidden" name="form_type" value="sub_category">
-								<button disabled class="btn btn-theme" id="sub_category" type="submit" >ADD</button>
-								<button class="btn btn-theme04" type="button">Cancel</button>
+								<input type="hidden" name="edit_sub_category_id" id="edit_sub_category_id">
+								<button class="btn btn-theme" id="sub_category" type="submit">ADD</button>
+								<button class="btn btn-theme hidden" id="edit_sub_category_btn" type="submit" value="ADD">Edit</button>
+								<a href="<?php echo base_url('admin/get_sub_category')?>" class="btn btn-theme04" type="button">Cancel</a>
 							</div>
 						</div>
-
 
 					</form>
 				</div>
@@ -93,6 +85,3 @@
 		<!-- /row -->
 	</section>
 	<!-- /wrapper -->
-
-	<!--main content end-->
-	<script type="text/javascript" src="js/ajaxForm.js"></script>

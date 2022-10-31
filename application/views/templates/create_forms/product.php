@@ -12,7 +12,7 @@
 			<div class="col-lg-12">
 				<div class="form-panel">
 
-					<form class="form-horizontal style-form" method="post" id="add_product" name="add_product" enctype="multipart/form-data">
+					<form class="form-horizontal style-form" action="product/create" method="post" id="add_product" name="add_product" enctype="multipart/form-data">
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">Meta Name</label>
 							<div class="col-sm-10">
@@ -40,15 +40,7 @@
 							<label class="col-sm-2 col-sm-2 control-label">Select Categery</label>
 							<div class="col-sm-10">
 								<select class="form-control " name="category_id" id="category_id">
-									<?php
-									$sql = "SELECT * FROM `category` where `status` = 1 ";
-									$result = mysqli_query($GLOBALS['conn'], $sql);
-									if (mysqli_num_rows($result) > 0) {
-										while ($row = mysqli_fetch_array($result)) {
-											echo "<option value =" . $row['id'] . ">" . $row['name'] . "</option>";
-										}
-									}
-									?>
+									<?php echo $category; ?>
 								</select>
 								<span class=" category-id text-danger"></span>
 							</div>
@@ -57,15 +49,7 @@
 							<label class="col-sm-2 col-sm-2 control-label">Select Sub Category</label>
 							<div class="col-sm-10">
 								<select class="form-control " name="sub_category_id" id="sub_category_id">
-									<?php
-									$sql = "SELECT * FROM `sub_category` where `status` = 1 ";
-									$result = mysqli_query($GLOBALS['conn'], $sql);
-									if (mysqli_num_rows($result) > 0) {
-										while ($row = mysqli_fetch_array($result)) {
-											echo "<option value =" . $row['id'] . ">" . $row['name'] . "</option>";
-										}
-									}
-									?>
+									<?php echo $sub_category; ?>
 								</select>
 								<span class="sub-category-id text-danger"></span>
 							</div>
@@ -90,19 +74,22 @@
 							<label class="control-label col-md-3">Upload Product Images</label>
 							<div class="col-md-4">
 								<input type="file" name="photo" class="default"/>
-								<input type="hidden" name="path" value="img.png">
+<!--								<input type="hidden" name="path" value="img.png">-->
 								<span class=" photo text-danger"></span>
 							</div>
 						</div>
 						<div class="form-group ">
 							<label class="col-sm-2 col-sm-2 control-label">Home Page Product</label>
 							<label class="checkbox-inline">
-								<input type="checkbox" name="" id="inlineCheckbox1" value="option1">
+								<input type="checkbox" name="priority" id="priority" value="1">
 							</label>
 						</div>
 						<div class="form-group">
 							<div class="col-lg-offset-2 col-lg-10">
-								<input type="hidden" name="form_type" value="product">
+								<input type="hidden" name="edit_product_id" id="edit_product_id">
+								<button class="btn btn-theme hidden" id="edit_product_btn" type="submit" value="ADD">
+									Edit
+								</button>
 								<button disabled class="btn btn-theme" id="product" type="submit" value="ADD" >ADD</button>
 								<button class="btn btn-theme04" type="button">Cancel</button>
 							</div>
@@ -117,4 +104,3 @@
 		<!-- /row -->
 
 	</section>
-	<script type="text/javascript" src="js/ajaxForm.js"></script>

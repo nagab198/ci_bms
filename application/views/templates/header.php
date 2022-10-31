@@ -305,7 +305,7 @@
 					</ul>
 				</li>
 				<li class="sub-menu">
-					<a href="user.php">
+					<a href="<?php echo base_url('/admin/get_user')?>">
 						<i class="fa fa-group"></i>
 						<span>Users</span>
 					</a>

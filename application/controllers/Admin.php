@@ -64,9 +64,8 @@ class Admin extends CI_Controller
 
 	public function get_business()
 	{
-		$data['business'] = $this->model_business->fetchBusiness(1);
 		$this->load->view('templates/header');
-		$this->load->view('view_business', $data);
+		$this->load->view('view_business');
 		$this->load->view('templates/footer');
 	}
 
@@ -79,17 +78,22 @@ class Admin extends CI_Controller
 
 	public function get_sub_category()
 	{
-		$data['sub_category'] = $this->model_sub_category->fetchSubCategory(1);
 		$this->load->view('templates/header');
-		$this->load->view('view_sub_category', $data);
+		$this->load->view('view_sub_category');
 		$this->load->view('templates/footer');
 	}
 
 	public function get_product()
 	{
-		$data['product'] = $this->model_product->fetchProduct(1);
 		$this->load->view('templates/header');
-		$this->load->view('view_product', $data);
+		$this->load->view('view_product');
+		$this->load->view('templates/footer');
+	}
+
+	public function get_user()
+	{
+		$this->load->view('templates/header');
+		$this->load->view('user');
 		$this->load->view('templates/footer');
 	}
 

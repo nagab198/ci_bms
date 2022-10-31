@@ -72,6 +72,57 @@ class Category extends CI_Controller
 		echo json_encode($validator);
 	}
 
+	public function update($id = null)
+	{
+		if ($id) {
+			$data = $this->model_category->fetchCategoryById($id);
+			$validator = array('success' => false, 'messages' => array());
+			$validate_data = array(
+				array(
+					'field' => 'meta_name',
+					'label' => 'Meta Name',
+					'rules' => 'required'
+				),
+				array(
+					'field' => 'meta_desc',
+					'label' => 'Meta Description',
+					'rules' => 'required'
+				),
+				array(
+					'field' => 'meta_keyword',
+					'label' => 'Meta Keyword',
+					'rules' => 'required'
+				),
+				array(
+					'field' => 'name',
+					'label' => 'Name',
+					'rules' => 'required'
+				)
+			);
+			$this->form_validation->set_rules($validate_data);
+			$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+			if ($this->form_validation->run() === true) {
+				$img = $this->uploadImage();
+				if ($this->model_category->updateInfo($data, $img)) {
+					$validator['success'] = true;
+					$validator['messages'] = "Successfully Updated category";
+				} else {
+					$validator['success'] = false;
+					$validator['messages'] = "Error while inserting the information into the database";
+				}
+			} else {
+				$validator['success'] = false;
+				foreach ($_POST as $key => $value) {
+					$validator['messages'][$key] = form_error($key);
+				}
+			} // /else
+
+			echo json_encode($validator);
+		}else{
+			echo 'id not found';
+		}
+	}
+
 	/*
 	*------------------------------------
 	* returns the uploaded image url
@@ -117,6 +168,7 @@ class Category extends CI_Controller
 	{
 		$data = $this->model_category->fetchCategoryById($category_id);
 		$category = (object)array(
+			'category_id' => $data['id'],
 			'name' => $data['name'],
 			'meta_desc' => $data['meta_desc'],
 			'meta_name' => $data['meta_name'],

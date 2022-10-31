@@ -4,7 +4,7 @@
 <!--main content start-->
 <section id="main-content">
 	<section class="wrapper">
-		<h3><i class="fa fa-angle-right"></i> Add Sub Categery</h3>
+		<h3><i class="fa fa-angle-right"></i> <span class="form-name">Add</span> Sub Category</h3>
 		<span class="response_msg"></span>
 		<!-- BASIC FORM ELELEMNTS -->
 		<div class="row mt">
@@ -58,18 +58,17 @@
 							<label class="control-label col-md-3">Upload Image</label>
 							<div class="col-md-4">
 								<input type="file" name="photo" class="default"/>
-								<input type="hidden" name="path" value="img.png">
 								<span class=" photo text-danger"></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-lg-offset-2 col-lg-10">
-								<input type="hidden" name="form_type" value="sub_category">
+								<input type="hidden" name="edit_sub_category_id" id="edit_sub_category_id">
 								<button class="btn btn-theme" id="sub_category" type="submit">ADD</button>
-								<button class="btn btn-theme04" type="button">Cancel</button>
+								<button class="btn btn-theme hidden" id="edit_sub_category_btn" type="submit" value="ADD">Edit</button>
+								<a href="<?php echo base_url('admin/get_sub_category')?>" class="btn btn-theme04" type="button">Cancel</a>
 							</div>
 						</div>
-
 
 					</form>
 				</div>

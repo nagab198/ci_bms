@@ -56,32 +56,25 @@ class model_category extends CI_Model
 		return $query->result_array();
 	}
 
-	/*
-	*------------------------------------
-	* updates teacher information
-	*------------------------------------
-	*/
-	public function updateInfo($teacherId = null)
+
+	public function updateInfo($data, $img)
 	{
-		if ($teacherId) {
+		$id = $data['id'];
+		if ($id) {
 			$update_data = array(
-				'register_date' => $this->input->post('editRegisterDate'),
-				'fname' => $this->input->post('editFname'),
-				'lname' => $this->input->post('editLname'),
-				'date_of_birth' => $this->input->post('editDob'),
-				'age' => $this->input->post('editAge'),
-				'contact' => $this->input->post('editContact'),
-				'email' => $this->input->post('editEmail'),
-				'address' => $this->input->post('editAddress'),
-				'city' => $this->input->post('editCity'),
-				'country' => $this->input->post('editCountry'),
-				'job_type' => $this->input->post('editJobType')
+				'name' => $this->input->post('name') ? $this->input->post('name') : $data['name'],
+				'meta_name' => $this->input->post('meta_name') ? $this->input->post('meta_name') : $data['meta_name'],
+				'meta_desc' => $this->input->post('meta_desc') ? $this->input->post('meta_desc') : $data['meta_desc'],
+				'meta_keyword' => $this->input->post('meta_keyword') ? $this->input->post('meta_keyword') : $data['meta_keyword'],
+				'home_priority' => $this->input->post('priority') ? $this->input->post('priority') : $data['home_priority'],
+				'img_url' => $img ? $img : $data['img_url'],
 			);
 
-			$this->db->where('teacher_id', $teacherId);
-			$query = $this->db->update('teacher', $update_data);
-
+			$this->db->where('id', $id);
+			$query = $this->db->update('category', $update_data);
 			return ($query === true ? true : false);
+		} else {
+			return false;
 		}
 	}
 

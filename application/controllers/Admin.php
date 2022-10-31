@@ -7,14 +7,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property $model_business
  * @property $model_product
  */
-class Admin extends CI_Controller
+class Admin extends MY_Controller
 {
 	public function __construct()
 	{
 		parent::__construct();
-
-//		$this->isNotLoggedIn();
-		// loading the teacher model
+		$this->isNotLoggedIn();
 		$this->load->model('model_category');
 		$this->load->model('model_sub_category');
 		$this->load->model('model_business');
@@ -23,6 +21,11 @@ class Admin extends CI_Controller
 	}
 
 	public function index()
+	{
+		$this->isLoggedIn();
+	}
+
+	public function dashboard()
 	{
 		$this->load->view('templates/header');
 		$this->load->view('templates/footer');

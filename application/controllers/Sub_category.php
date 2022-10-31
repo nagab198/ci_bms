@@ -4,12 +4,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * @property $model_sub_category
  */
-class Sub_category extends CI_Controller
+class Sub_category extends MY_Controller
 {
 	public function __construct()
 	{
 		parent::__construct();
-//		$this->isNotLoggedIn();
+		$this->isNotLoggedIn();
 		$this->load->model('model_sub_category');
 
 	}

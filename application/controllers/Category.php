@@ -4,15 +4,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * @property $model_category
  */
-class Category extends CI_Controller
+class Category extends MY_Controller
 {
 	public function __construct()
 	{
 		parent::__construct();
 
-//		$this->isNotLoggedIn();
+		$this->isNotLoggedIn();
 
-		// loading the teacher model
 		$this->load->model('model_category');
 
 	}

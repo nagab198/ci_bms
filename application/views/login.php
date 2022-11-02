@@ -50,7 +50,6 @@
 				<span class=" password text-danger"></span>
 			</div>
 				<label class="checkbox">
-					<input type="checkbox" value="remember-me"> Remember me
 					<span class="pull-right">
             <a data-toggle="modal" href="login.html#myModal"> Forgot Password?</a>
             </span>
@@ -59,11 +58,7 @@
 					IN
 				</button>
 				<hr>
-				<div class="login-social-link centered">
-					<p>or you can sign in via your social network</p>
-					<button class="btn btn-facebook" type="submit"><i class="fa fa-facebook"></i> Facebook</button>
-					<button class="btn btn-twitter" type="submit"><i class="fa fa-twitter"></i> Twitter</button>
-				</div>
+
 				<div class="registration">
 					Don't have an account yet?<br/>
 					<a class="" href="#">

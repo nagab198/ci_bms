@@ -6,7 +6,7 @@ if (!function_exists('do_upload')) {
 	{
 		$config['upload_path'] = 'uploads/images/categories/';
 		$config['allowed_types'] = 'gif|jpg|jpeg|png';
-		$config['max_size'] = 100;
+		$config['max_size'] = 2048;
 		$config['encrypt_name'] = true;
 		$config['remove_spaces'] = true;
 		$config['detect_mime'] = true;
